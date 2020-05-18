@@ -1,6 +1,6 @@
 ##  Prueba refactor masivian
 
-Se realizo refactor de la clase enviada para esto se creo 3 clases con su propia responsabilidad las cuales explico a continuación:
+Se crea un proyecto en maven con java 8 y se coloca la clase Printer en el paquete co.com.masivian.original y se realiza refactor en el paquete co.com.masivian.refactor la cual contiene 3 clases con su propia responsabilidad las cuales explico a continuación:
 
 ## Printer.java
 
