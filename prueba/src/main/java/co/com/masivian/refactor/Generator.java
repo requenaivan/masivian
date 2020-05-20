@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Generator {
+public class Generator implements Runnable{
 
 	/** Array de numeros primos **/
-	private static int[] primes;
+	private int[] primes;
 
 	/** Numero 2 de constante **/
 	private static final int NUMBER_TWO = 2;
@@ -18,22 +18,15 @@ public class Generator {
 	/** Numero 0 de constante **/
 	private static final int NUMBER_ZERO = 0;
 
-	/**
-	 * Genera los numeros primos
-	 * @param cantidad de numeros primos a construir
-	 * @return
-	 */
-	protected static int[] generate(int n) {
-		primes = new int[n];
-		verifyNumbersPrime();
-		//verifyNumbersPrimeWitStream();
-		return primes;
+	public Generator(int n) {
+		this.primes = new int[n];
 	}
+
 
 	/**
 	 * Verifica si el numero es primo recorriendo la cantidad que se espera
 	 */
-	private static void verifyNumbersPrime() {
+	private synchronized void verifyNumbersPrime() {
 		int primeIndex = 1;
 		for (int j = NUMBER_TWO; j <= Integer.MAX_VALUE && primeIndex < primes.length; j++) {
 			if(isPrime(j)) {
@@ -45,7 +38,7 @@ public class Generator {
 	/**
 	 * Genera la lista de numeros primos con java 8 streams
 	 */
-	private static void verifyNumbersPrimeWitStream(){
+	private void verifyNumbersPrimeWitStream(){
 		List<Integer> primeList = IntStream.range(2, Integer.MAX_VALUE)
 				.filter(n -> isPrime(n))
 				.limit(primes.length)
@@ -71,6 +64,19 @@ public class Generator {
 			}
 		}
 		return true; 
+	}
+
+	@Override
+	public void run() {
+		verifyNumbersPrime();
+	}
+	
+	/**
+	 * get de array de numeros primos
+	 * @return
+	 */
+	public  int[] getPrimes() {
+		return primes;
 	}
 
 }

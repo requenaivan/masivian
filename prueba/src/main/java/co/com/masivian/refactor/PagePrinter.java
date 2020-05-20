@@ -25,7 +25,7 @@ public class PagePrinter {
 	 * Imprime la data generada
 	 * @param data
 	 */
-	public void print(int data[]) {
+	public void print(int[] data) {
 		int pageNumber = 1;
 		for (int firstIndex = 0;firstIndex < data.length; firstIndex += numbersPerPage) {
 			int lastIndex= Math.min(firstIndex + numbersPerPage - 1, data.length - 1);
